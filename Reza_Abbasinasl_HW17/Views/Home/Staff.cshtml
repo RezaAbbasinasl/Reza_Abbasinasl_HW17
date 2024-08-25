@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Staff>
+
+
+<form asp-controller="Home" asp-action="Staff" method="get">
+    <p>
+        StoreId : <input name="StoreId" />
+        <input type="submit" value="Filter"  />
+    </p>
+</form>
+
+<form asp-controller="Home" asp-action="Staff" method="get">
+    <p>
+        StoreName : <input name="StoreName" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First_Name</th>
+            <th>Last_Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Store_Id</th>
+            <th>Store_Name</th>
+            <th>Manager_Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.First_Name</td>
+                <td>@item.Last_Name</td>
+                <td>@item.Email</td>
+                <td>@item.Phone</td>
+                <td>@item.Store_Id</td>
+                <td>@item.Store_Name</td>
+                <td>@item.Manager_Name</td>
+            </tr>
+        }
+    </tbody>
+
+</table>

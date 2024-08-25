@@ -1,0 +1,80 @@
+﻿@model IEnumerable<RegisteredOrder>
+@{
+    int ProductId = 0;
+    string ProductName = "";
+    int quantity = 0;
+    decimal ListPrice = 0;
+    decimal discount = 0;
+    decimal TotalAmount = 0;
+}
+<form asp-controller="Home" asp-action="SearchRegisteredOrders" method="get">
+    <p>
+        StoreId : <input name="OrderId" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order_Id</th>
+            <th>First_Name</th>
+            <th>Last_Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Order_Date</th>
+            <th>Required_Date</th>
+            <th>Shipped_Date</th>
+            <th>FullNameStaff</th>
+            <th>ShowOrderDetails</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>                
+                <td>@item.Order_Id</td>
+                <td>@item.First_Name</td>
+                <td>@item.Last_Name</td>
+                <td>@item.Address</td>
+                <td>@item.Phone</td>
+                <td>@item.Order_Date</td>
+                <td>@item.Required_Date</td>
+                <td>@item.Shipped_Date</td>
+                <td>@item.FullNameStaff</td>
+                @{
+                    ProductId = item.Product_Id;
+                    ProductName = item.Product_Name;
+                   quantity = item.Quantity;
+                   ListPrice = item.List_Price;
+                   discount = item.Discount;
+                   TotalAmount = item.List_Price * @item.Quantity * @item.Discount / 100;
+                }
+                
+                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Open modal for </button></td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Order Register</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>ProductId : @ProductId</p>
+                <p>Product Name : @ProductName</p>
+                <p>Quantity : @quantity</p>
+                <p>List Price : @ListPrice</p>
+                <p>Discount : @discount</p>
+            </div>
+            <div class="modal-footer">
+                <p>Total : @TotalAmount</p>
+            </div>
+        </div>
+    </div>
+</div>
