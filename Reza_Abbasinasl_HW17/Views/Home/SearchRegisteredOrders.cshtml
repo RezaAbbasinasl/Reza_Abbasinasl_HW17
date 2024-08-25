@@ -48,7 +48,7 @@
                    quantity = item.Quantity;
                    ListPrice = item.List_Price;
                    discount = item.Discount;
-                   TotalAmount = item.List_Price * @item.Quantity * @item.Discount / 100;
+                    TotalAmount = (item.List_Price * @item.Quantity) - (item.List_Price * @item.Quantity * @item.Discount / 100);
                 }
                 
                 <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Open modal for </button></td>
